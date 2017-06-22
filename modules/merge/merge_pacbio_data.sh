@@ -1,0 +1,1 @@
+find /its1/GB_BT2/jianzuoyi/workspace/barley/data/Pacbio/ -name '*.bam.fasta.gz' | xargs -I {} zcat {} | gzip -c > /its1/GB_BT2/jianzuoyi/workspace/barley/output/merge/Pacbio/barley.subreads.merged.fasta.gz
