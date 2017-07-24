@@ -10,8 +10,13 @@ run:
 test:
 	./check.py
 cleanall:
-	\rm -rf 0-*/preads 1-*/ 2-*/ mypwatcher/ *.log
+	\rm -rf 0-*/ 1-*/ 2-*/ mypwatcher/ *.log run_falcon.sh.e run_falcon.sh.o nohup.out *~
 cleanovl:
 	\rm -rf 1-*/ 2-*/ mypwatcher/ *.log
 cleanasm:
 	\rm -rf 2-*/ mypwatcher/ *.log
+rerun:
+	\mkdir -p versions
+	\mv all.log versions/all0.log
+	\mv mypwatcher/ versions/mypwatcher0
+	\rm run_falcon.sh.e run_falcon.sh.o nohup.out

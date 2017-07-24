@@ -1,0 +1,1 @@
+qsub -cwd -S /bin/bash -m ea -M zzzzzuo@163.com -l vf=400G,p=1 -q bm.q run_dbg2olc.sh
