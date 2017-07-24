@@ -1,18 +1,23 @@
 #!/bin/bash
 set -vex
 
+# --------------------------------------------------------
+# Author:  Zuoyi Jian
+# Email:   jianzuoyi@qq.com
+# Date:    2017-7-5
+# Version: 1.0
+# --------------------------------------------------------
 # Usage: $soapdenovo_pipeline config kmers
 source $1
 
-pregraph_jobs=1-run_pregraph_jobs.sh
-contig_jobs=2-run_contig_jobs.sh
+pregraph_jobs=run_pregraph_jobs.sh
+contig_jobs=run_contig_jobs.sh
 echo -e "#!/bin/bash\nset -vex\n" > $pregraph_jobs
 echo -e "#!/bin/bash\nset -vex\n" > $contig_jobs
 chmod +x $pregraph_jobs
 chmod +x $contig_jobs
 
 SOAPdenovo=${SOAPDENOVO63MER}
-#for kmer in 31 45 63 83 93
 while read kmer
 do
     if [[ $kmer -gt 63 ]]; then
@@ -22,7 +27,7 @@ do
     mkdir -p $shdir
     prefix=${OUTDIR}/kmer${kmer}/barley
     # STEP 1 pregraph
-    sh=${shdir}/1-soapdenovo_pregraph.sh
+    sh=${shdir}/soapdenovo_pregraph.sh
     echo -e "#!/bin/bash\nset -vex" > $sh
     chmod +x $sh
     echo "
@@ -33,13 +38,13 @@ $SOAPdenovo sparse_pregraph \\
 -s $LIB \\
 -o $prefix \\
 -K $kmer \\
--z 4480000000 \\
+-z $GENOMESIZE \\
 -p $THREADS
 touch ${sh}.done" >> $sh
     echo "yhrun -p MEM_6TB -c ${THREADS} -n 1 -N 1 -e $sh.e -o $sh.o $sh &" >> $pregraph_jobs
 
     # STEP 2 contig
-    sh=${shdir}/2-soapdenovo_contig.sh
+    sh=${shdir}/soapdenovo_contig.sh
     echo -e "#!/bin/bash\nset -vex" > $sh
     chmod +x $sh
     echo "

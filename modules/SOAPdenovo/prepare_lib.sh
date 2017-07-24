@@ -1,105 +1,58 @@
 #!/bin/bash
-lib=lib.cfg
-echo -e "max_rd_len=150\n" > $lib
 
-# single
-echo "[LIB]" >> $lib
-echo "asm_flags=1" >> $lib
-echo "# fasta file for single reads" >> $lib
-find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*single.gz' | xargs -n1 -I {} echo f={}| sort | while read fa
+LIB=lib.cfg
+LIB_INSERT=barley.insert.size
+DATA_DIR=/HOME/genebang_txu_1/BIGDATA/data/barley/illuminua
+
+echo "max_rd_len=150" > $LIB
+
+#Single
+echo -e "\n[LIB]
+asm_flags=1
+# fasta file for single reads" >> $LIB
+find $DATA_DIR -type f -name '*single.gz' | xargs -n1 -I {} echo f={}| sort | while read fa
 do
-  echo $fa >> $lib
+  echo $fa >> $LIB
 done
 
-# pair-end 250
-find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*pair.gz' | xargs -n1 -I {} echo p={}| sort| sed -n '1,12p' | while read fa
+while read line
 do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=250" >> $lib
-    echo "asm_flags=3" >> $lib
-    echo "rank=1" >> $lib
-    echo $fa >> $lib
-    echo "" >> $lib
-done
-
-# pair-end 500
-for SRR in SRR1804509 SRR1804510 SRR1804513 SRR1804514
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=500" >> $lib
-    echo "asm_flags=3" >> $lib
-    echo "rank=1" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*pair.gz' | grep $SRR | xargs -I {} echo p={} >> $lib
-    echo "" >> $lib
-done
-
-# pair-end 800
-for SRR in SRR1804511 SRR1804512 SRR1804515
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=800" >> $lib
-    echo "asm_flags=3" >> $lib
-    echo "rank=1" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*pair.gz' | grep $SRR | xargs -I {} echo p={} >> $lib
-    echo "" >> $lib
-done
-
-# mate-pair 2000
-for SRR in SRR1804516 SRR1804517 SRR1804518 SRR1804519
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=2000" >> $lib
-    echo "reverse_seq=1" >> $lib
-    echo "asm_flags=2" >> $lib
-    echo "rank=2" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*clean.gz' | grep $SRR | sort | awk '{print "q"NR"="$0}' >> $lib
-    echo "" >> $lib
-done
-
-# mate-pair 5000
-for SRR in SRR1804520 SRR1804521 SRR1804522 SRR1804523
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=5000" >> $lib
-    echo "reverse_seq=1" >> $lib
-    echo "asm_flags=2" >> $lib
-    echo "rank=3" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*clean.gz' | grep $SRR | sort | awk '{print "q"NR"="$0}' >> $lib
-    echo "" >> $lib
-done
-
-# mate-pair 10000
-for SRR in SRR1804524 SRR1804525 SRR1804526
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=10000" >> $lib
-    echo "reverse_seq=1" >> $lib
-    echo "asm_flags=2" >> $lib
-    echo "rank=4" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*clean.gz' | grep $SRR | sort | awk '{print "q"NR"="$0}' >> $lib
-    echo "" >> $lib
-done
-
-# mate-pair 20000
-for SRR in SRR1804527 SRR1804528 SRR1804529
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=20000" >> $lib
-    echo "reverse_seq=1" >> $lib
-    echo "asm_flags=2" >> $lib
-    echo "rank=5" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*clean.gz' | grep $SRR | sort | awk '{print "q"NR"="$0}' >> $lib
-    echo "" >> $lib
-done
-
-# mate-pair 40000
-for SRR in SRR1804530 SRR1804531 SRR1804532
-do
-    echo "[LIB]" >> $lib
-    echo "avg_ins=40000" >> $lib
-    echo "reverse_seq=1" >> $lib
-    echo "asm_flags=2" >> $lib
-    echo "rank=6" >> $lib
-    find /HOME/genebang_txu_1/BIGDATA/data/barley/illuminua/ -type f -name '*clean.gz' | grep $SRR | sort | awk '{print "q"NR"="$0}' >> $lib
-    echo "" >> $lib
-done
+    arr=($line)
+    SRR=${arr[0]}
+    avg_ins=${arr[1]}
+    fq=""
+    if [[ $avg_ins -lt 1000 ]]; then
+        asm_flags=3
+    	reverse_seq=0
+	fq=$(find $DATA_DIR -type f -name "${SRR}*pair.gz" | xargs -I {} echo p={})
+    else
+	asm_flags=2
+        reverse_seq=1
+  	q1=$(find $DATA_DIR -type f -name "${SRR}_1*.gz" | xargs -I {} echo q1={})
+	q2=$(find $DATA_DIR -type f -name "${SRR}_1*.gz" | xargs -I {} echo q2={})
+	fq="$q1
+$q2"
+    fi
+    # Rank
+    rank=0
+    if [[ $avg_ins -gt 200 && $avg_ins -lt 1000 ]]; then
+        rank=1
+    elif [[ $avg_ins -gt 1900 && $avg_ins -lt 2100 ]]; then
+	rank=2
+    elif [[ $avg_ins -gt 4900 && $avg_ins -lt 5100 ]]; then
+	rank=3
+    elif [[ $avg_ins -gt 9900 && $avg_ins -lt 11000 ]]; then
+	rank=4
+    elif [[ $avg_ins -gt 19000 && $avg_ins -lt 21000 ]]; then
+	rank=5
+    elif [[ $avg_ins -gt 39000 && $avg_ins -lt 41000 ]]; then
+    	rank=6
+    fi
+    
+    echo -e "\n[LIB]
+avg_ins=$avg_ins
+asm_flags=$asm_flags
+reverse_seq=$reverse_seq
+rank=$rank
+$fq" >> $LIB
+done < $LIB_INSERT
