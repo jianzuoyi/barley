@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PROCESS=run_falcon.sh
+running_program=$(ps aux | grep $PROCESS | grep -v grep)
+while(true)
+do
+    if [[ -z "$running_program" ]]; then
+	echo $PROCESS is exited
+	echo "$PROCESS is exited" | mail -s "$PROCESS is exited" zzzzzuo@163.com
+	break
+    fi
+done
