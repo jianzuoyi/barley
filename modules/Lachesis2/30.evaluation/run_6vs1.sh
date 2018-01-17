@@ -1,0 +1,1 @@
+bash /its1/GB_BT2/jianzuoyi/workspace/barley/modules/Lachesis2/30.evaluation/run_mummerplot.sh 6vs1 /its1/GB_BT2/jianzuoyi/workspace/barley/modules/Lachesis2/30.evaluation/split/Reference/6H.fa /its1/GB_BT2/jianzuoyi/workspace/barley/modules/Lachesis2/30.evaluation/split/Lachesis/Lachesis_group0__660_contigs__length_1464064476.fa 32
