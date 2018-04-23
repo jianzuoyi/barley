@@ -1,0 +1,13 @@
+{
+  "ImageId": "ami-879c88e5",
+  "KeyName": "20180313-ningxia",
+  "SecurityGroupIds": [ "sg-99188bf0" ],
+  "InstanceType": "INSTANCETYPE_XXXXXX",
+  "Placement": {
+    "AvailabilityZone": "cn-northwest-1a"
+  },
+  "IamInstanceProfile": {
+      "Arn": "arn:aws-cn:iam::286687246235:instance-profile/gb-admin"
+  },
+  "UserData":"USERDATA_XXXXXX"
+}
