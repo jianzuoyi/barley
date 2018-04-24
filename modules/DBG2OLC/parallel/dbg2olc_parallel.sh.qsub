@@ -1,7 +1,0 @@
-#!/bin/bash
-find /its1/GB_BT2/jianzuoyi/workspace/barley/modules/DBG2OLC/1-parallel -type f -name 'run_dbg2olc.sh' | xargs -n1 -I {} dirname {} | while read wd
-do
-    cd $wd
-#    echo $wd
-    qsub -cwd -S /bin/bash -m ea -M zzzzzuo@163.com -l vf=90G,p=1 run_dbg2olc.sh
-done

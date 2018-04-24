@@ -1,4 +1,0 @@
-/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/fastqc -t 8 -o /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/FastQC /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/Trimmomatic/output/LSGMHC_R1.clean.pair.fq.gz
-/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/fastqc -t 8 -o /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/FastQC /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/Trimmomatic/output/LSGMHC_R1.clean.single.fq.gz
-/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/fastqc -t 8 -o /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/FastQC /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/Trimmomatic/output/LSGMHC_R2.clean.pair.fq.gz
-/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/fastqc -t 8 -o /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/FastQC /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/Trimmomatic/output/LSGMHC_R2.clean.single.fq.gz

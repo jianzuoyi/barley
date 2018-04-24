@@ -1,1 +1,0 @@
-perl count_sequencing_depth_point.pl total_depthsingle sequencing_depth_point.xls

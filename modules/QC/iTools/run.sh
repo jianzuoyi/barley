@@ -1,1 +1,0 @@
-/its1/GB_BT2/jianzuoyi/pipeline/Module/QC/iTools/iTools_Code/iTools Fqtools stat -InFq /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/LSGMHC_merged.fq.gz -OutStat /its1/GB_BT2/jianzuoyi/workspace/barley/modules/QC/iTools/LSGMHC_merged.stat -CPU 16

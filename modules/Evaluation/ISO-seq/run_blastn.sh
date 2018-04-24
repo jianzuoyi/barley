@@ -1,1 +1,0 @@
-blastn -query all_quivered_hq.100_30_0.99.fasta -db /its1/GB_BT2/jianzuoyi/database/barley/unzip.10k.2/IndexBlast/p_h_ctg.fa -max_target_seqs 1 -max_hsps 1 -num_threads 32 -outfmt "6 qaccver saccver pident length qstart qend sstart send qcovhsp" -out out.blast

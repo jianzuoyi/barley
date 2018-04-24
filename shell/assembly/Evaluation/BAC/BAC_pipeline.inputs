@@ -1,0 +1,14 @@
+{
+  "BAC_pipeline.BAC": "/its1/GB_BT2/jianzuoyi/workspace/Barley/shell/assembly/Evaluation/BAC/HVVMRXALLhA0545D03_v1_c1.fa",
+  "BAC_pipeline.assembly": "/its1/GB_BT2/jianzuoyi/workspace/Barley/result/asmDB/v1/blast/Hulless_barley.scaffold.fa",
+  "BAC_pipeline.blastn.blastn": "/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/blastn",
+  "BAC_pipeline.threads": "24",
+  "BAC_pipeline.getscaffold.filterbyname": "/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/filterbyname.sh",
+  "BAC_pipeline.getscaffold.fastalength": "/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/fastalength",
+  "BAC_pipeline.getscaffold.samtools": "/its1/GB_BT2/jianzuoyi/biosoft/anaconda/bin/samtools",
+  "BAC_pipeline.nucmer.nucmer": "/its1/GB_BT2/jianzuoyi/biosoft/mummer/bin/nucmer",
+  "BAC_pipeline.nucmer.delta_filter": "/its1/GB_BT2/jianzuoyi/biosoft/mummer/bin/delta-filter",
+  "BAC_pipeline.mummerplot.mummerplot": "/its1/GB_BT2/jianzuoyi/biosoft/mummer/bin/mummerplot",
+  "BAC_pipeline.mummerplot.gnuplot_dir": "/its1/GB_BT2/jianzuoyi/biosoft/gnuplot",
+  "BAC_pipeline.mummerplot.gnuplot_bin": "/its1/GB_BT2/jianzuoyi/biosoft/gnuplot/bin"
+}

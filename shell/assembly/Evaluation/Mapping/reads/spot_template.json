@@ -1,5 +1,5 @@
 {
-  "ImageId": "ami-879c88e5",
+  "ImageId": "ami-f5968297",
   "KeyName": "20180313-ningxia",
   "SecurityGroupIds": [ "sg-99188bf0" ],
   "InstanceType": "INSTANCETYPE_XXXXXX",
